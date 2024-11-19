@@ -77,4 +77,20 @@
      - 손실함수로서의 MAE와 MSE 비교
      - 교차 엔트로피 오차(Cross Entropy Error, CEE)
         - 이진 분류에서의 교차 크로스 엔트로피(Binary Cross Entropy, BCE)
+## 5. 경사 하강법
+1. 볼록함수(Convex Function)
+2. 비볼록함수(Non-Convex-Function)
+3. 경사하강법
+   - 미분과 기울기
+   - 경사하강법의 과정
+   - 경사하강법 구현
+   - 경사하강법 시각화
+   - 비볼록 함수(Non-Convex Function)에서의 경사하강법
+   - 비볼록함수 경사하강법 시각화
+4. 전역 최적값 vs 지역 최적값
+   - 전역 최솟값 vs 지역 최솟값 시각화
+   - 경사하강법 구현(2)
+5. 학습률(learning rate)
+   - 학습률별 경사하강법
+6. 안장점(Saddle Point)
 
