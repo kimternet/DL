@@ -94,3 +94,36 @@
    - 학습률별 경사하강법
 6. 안장점(Saddle Point)
 
+## 6. 신경망 학습
+1. 단순한 신경망 구현: Logic Gate
+   - 필요한 모듈 import
+   - 하이퍼파라미터(HyperParameter)
+   - 유틸 함수들(Utill Functions)
+   - 신경망
+   - AND Gate
+      - 모델 생성 및 학습
+      - 테스트
+   - OR Gate
+      - 모델 생성 및 학습
+      - 테스트
+   - NAND Gate
+      - 모델 생성 및 학습
+      - 테스트
+      - 2층 신경망으로 XOR 게이트 구현(1)
+      - 테스트
+      - 2층 신경망으로 XOR게이트 구현(2)
+      - 하이퍼파라미터(HyperParameter)
+      - 모델 생성 및 학습
+      - 테스트
+2. 다중 클래스 분류:MNIST Dataset
+   - 배치 처리
+     - 신경망 구현:MNIST
+     - 필요한 모듈 임포트
+     - 데이터 로드
+     - 데이터 확인
+     - 데이터 전처리(Data Preprocessing)
+     - 하이퍼파라미터(HyperParameter)
+     - 사용되는 함수들(Util Functions)
+     - 2층 신경망으로 구현
+     - 모델 생성 및 학습
+   - 모델 결과과
