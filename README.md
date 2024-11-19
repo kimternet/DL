@@ -1,3 +1,4 @@
+
 ## 1. 신경망 기초수학( 함수, 극한, 미분 등 파이썬으로 구현)
 1. 1차함수
 2. 2차함수
@@ -63,3 +64,17 @@
       - 활성화 함수 정의
       - 레이어 정의
       - 신경망 추론 실행
+## 4.모델 학습과 손실함수
+1. 모델 학습과 손실함수
+   - 모델의 학습
+     - 지도 학습 vs 비지도 학습
+   - 학습 매개변수(Hyper Parameter)
+   - 손실함수(Loss Function, Cost Function)
+     - 학습의 수학적 의미
+     - 원-핫 인코딩(one-hot encoding)
+     - 평균절대오차(Mean Absolute Error, MAE)
+     - 평균제곱오차(Mean Squared Error, MSE)
+     - 손실함수로서의 MAE와 MSE 비교
+     - 교차 엔트로피 오차(Cross Entropy Error, CEE)
+        - 이진 분류에서의 교차 크로스 엔트로피(Binary Cross Entropy, BCE)
+
