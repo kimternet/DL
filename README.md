@@ -127,3 +127,31 @@
      - 2층 신경망으로 구현
      - 모델 생성 및 학습
    - 모델 결과
+## 7. 오차역전파(Backpropagation)
+1. 오차역전파 알고리즘
+2. 오차역전파 학습의 특징
+3. 신경망 학습에 있어서 미분가능의 중요성
+4. 합성함수의 미분(연쇄법칙, chain rule)
+   - 합성함수 미분(chain rule) 예제
+5. 덧셈, 곱셈 계층의 역전파
+6. 활성화 함수(Activation)에서의 역전파
+   - 시그모이드(Sigmoid)함수
+   - ReLU 함수
+7. 행렬 연산에 대한 역전파
+   - 순전파(forward)
+   - 역전파(1)
+   - 역전파(2)
+   - 배치용 행렬 내적 계층
+8. MNIST 분류 with 역전파
+   - Modules Import
+   - 데이터 로드
+   - 데이터 전처리
+   - Hyper Parameters
+   - Util Functions
+   - Util Classes
+     - ReLU
+     - Sigmoid
+     - Layer
+   - Softmax
+   - 모델 생성 및 학습
+ 
