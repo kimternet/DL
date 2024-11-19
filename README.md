@@ -1,4 +1,4 @@
-# 1. 신경망 기초수학( 함수, 극한, 미분 등 파이썬으로 구현)
+## 1. 신경망 기초수학( 함수, 극한, 미분 등 파이썬으로 구현)
 1. 1차함수
 2. 2차함수
 3. 3차함수(다항함수)
@@ -21,7 +21,7 @@
    - 편미분
    - 기울기(gradient)
    - 기울기의 의미를 그래프로 확인
-# 2. 신경망 데이터 표현
+## 2. 신경망 데이터 표현
 1. 텐서(Tensor)
 2. 스칼라(0차원 텐서)
 3. 벡터(1차원 텐서)
@@ -37,3 +37,29 @@
    - 3차원 텐서 활용 예시(이미지)
 7. 브로드캐스팅(broadcasting)
    - 4, 5차원 텐서(동영상)
+## 3. 신경망 구조
+1. 신경망 구조
+     - 퍼셉트론
+     - 뉴런의 수학적 표현
+     - 완전 연결 계층(Fully-Connected Layer) 수학적 표현
+     - 논리회로(AND, OR, NAND, XOR 게이트)
+     - 다층 퍼셉트론(Multi Layer Perceptron, MLP)
+       -다층 퍼셉트론의 구성
+       -XOR 게이트
+     - 활성화 함수(Activation Function)
+       - Step Function(계단함수)
+       - sigmoid Function(시그모이드)
+       - 시그모이드 함수와 계단 함수 비교
+       - ReLU(Rectified Linear Unit)
+       - 하이퍼볼릭탄젠트 함수(Hyperbolic tangent function, tanh)
+       - Identity Function(항등 함수)
+       - Softmax
+         - 소프트맥스 함수 주의점
+       - max(a)를 빼는 이유
+         - 활성화 함수를 비선형 함수(non-linear function)로 사용하는 이유
+         - 그 외의 활성화 함수
+         - 활성화 함수(Activate Function)참고
+    - 3층 신경망 구성하기
+      - 활성화 함수 정의
+      - 레이어 정의
+      - 신경망 추론 실행
