@@ -158,4 +158,60 @@
     - SGD추가
     - 정규화 및 모델 용량, 하이퍼파라미터 튜닝
     - Loss 시각화해서 보기
+## 8. 딥러닝 학습 기술
+1. 최적화 방법: 매개변수 갱신
+   - 확률적 경사하강법(Stochastic Gradient Descent, SGD)
+   - SGD의 단점
+   - 모멘텀(Momentum)
+   - AdaGrad(Adaptive Gradient)
+   - RMSProp(Root Mean Square Propagation)
+   - Adam(Adaptive moment estimation)
+2. 최적화 방법 비교(예, Linear Regression)
+3. AI 두 번째 위기(가중치 손실, Gradient Vanishing)
+4. 가중치 초기화
+   - 초기값 : 0(zeros)
+   - 초기값: 균일분포(Uniform)
+   - 초기값: 정규분포(nomalization)
+   - 아주 작은 정규분포값으로 가중치 초기화
+   - 초기값: Xavier(Glorot)
+   - 초기값: Xavier(Glorot)-tanh
+5. 비선형 함수에서의 가중치 초기화
+   - 초기값: 0(zeros)
+   - 초기값: 정규분포(Nomalization)
+     - 표준편차: 0.01일 때
+   - 초기값: Xavier(Glorot)
+   - 초기값: He
+6. 배치 정규화(Batch Normalization)
+7. 과대적합(Overfitting)/과소적합(Underfitting)
+   - 과대적합 (Overfitting, 오버피팅)
+   - 과소적합 (Underfitting, 언더피팅)
+8. 규제화(Regularization) - 가중치 감소
+   - L2 규제
+   - L1 규제
+9. 드롭아웃(Dropout)
+10. 하이퍼파라미터(Hyper Parameter)
+    - 학습률(Learning Rate)
+    - 학습 횟수(Epochs)
+    - 미니배치 크기(Mini Batch Size)
+    - 검증데이터(Validation Data)
+11. MNIST 분류
+    - Modules Import
+    - 데이터 로드, 전처리
+    - Hyper Parameters
+    - Util Function
+    - Util Classes
+      - ReLU
+      - Sigmoid
+      - Layer
+      - Batch Normalization
+      - Dropout
+      - Softmax
+12. Model
+    - 모델 생성 및 학습1
+      - 시각화
+    - 모델 생성 및 학습2
+      - 시각화
+    - 모델 생성 및 학습3
+      - 시각화
+13. 3가지 모델 비교교
  
