@@ -214,4 +214,52 @@
     - 모델 생성 및 학습3
       - 시각화
 13. 3가지 모델 비교
+## 9. CNN
+1. 합성곱 신경망(Convolutional Neural Networks, CNNs)
+   - 완전연결계층과의 차이
+   - 컨볼루션 신경망 구조 예시
+   - 합성곱 연산
+   - 패딩(padding)과 스트라이드(stride)
+     - 패딩
+     - 스트라이드
+   - 출력 데이터의 크기
+   - 풀링(Pooling)
+     - 맥스 풀링(Max Pooling)
+     - 평균 풀링(Avg Pooling)
+   - 합성곱 연산의 의미
+   - 2차원 이미지에 대한 필터 연산 예시
+     - modules import
+     - util functions
+     - 이미지 확인
+     - 필터연산 적용
+     - 이미지 필터를 적용한 최종 결과
+   - 3차원 데이터의 합성곱 연산
+     - 연산과정
+     - modules import
+     - util functions
+     - 이미지 확인
+     - 필터연산 적용
+     - 필터연산을 적용한 최종 결과
+     - 전체 과정 한번에 보기
+2. 합성곱 신경망 구현
+   - 합성곱 층(Convolution Layer)
+     - 컨볼루션 레이어 테스트
+     - 동일한 이미지 여러 장 테스트(배치 처리)
+     - 동일한 이미지 배치처리(color)
+   - 풀링 층(Pooling Layer)
+     - 풀링 레이어 테스트
+     - 동일한 이미지 배치처리
+3. 대표적인 CNN 모델 소개
+   - LeNet -5
+   - AlexNet
+   - VGG- 16
+4. CNN 학습 구현 -MNIST
+   - modules import
+   - Util Functions
+   - Util Classes
+   - 데이터 로드
+   - Build Model
+   - Hyper Parameters
+5. 모델 생성 및 학습
+   - 학습이 잘 안된 이유
  
