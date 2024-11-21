@@ -262,4 +262,26 @@
    - Hyper Parameters
 5. 모델 생성 및 학습
    - 학습이 잘 안된 이유
+## 10. RNN
+1. RNN 순환 신경망
+2. 자연어 처리(Natural Language Processing, NLP)
+   - 신경망에서의 단어 처리(단어 임베딩, Word Embedding)
+   - 신경망에서의 단어처리 구조
+   - CBOW(Continuous Bag of Words Embedding)
+   - Skip-Gram Embedding
+   - Word2Vec
+   - Word2Vec 예제
+     - 네이버 영화 감상 코퍼스를 사용한 한국어 단어 임베딩
+3. 순환 신경망(Recurrent Neural Network, RNN)
+   - Feed Forward Network vs Recurrent Network
+   - 순환 신경망 구조
+   - 순환 신경망의 다양한 구조
+   - 두 가지 정보(현재입력, 이전 시각의 출력)을 처리하는 수식
+   - BPTT(BackPropagation Through Time)
+   - Truncated BPTT
+   - RNN구현
+   - Time RNN Layer
+4. LSTM(Long Short-Term Memory)
+5. GRU(Gated Recurrent Unit)
+6. RNN VS LSTM VS GRU
  
