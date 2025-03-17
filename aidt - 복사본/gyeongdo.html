@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경도 장애 학생용 패턴 인식 학습</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+        
+        body {
+            font-family: 'Jua', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f7ff;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #6a5acd;
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 36px;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 15px 30px;
+            background-color: #e0e0ff;
+            border: none;
+            border-radius: 30px;
+            margin: 0 10px;
+            font-size: 18px;
+            font-family: 'Jua', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .tab:hover {
+            background-color: #d0d0ff;
+            transform: translateY(-3px);
+        }
+        
+        .tab.active {
+            background-color: #6a5acd;
+            color: white;
+        }
+        
+        .content {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .activity {
+            display: none;
+        }
+        
+        .activity.active {
+            display: block;
+        }
+        
+        h2 {
+            color: #6a5acd;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .instructions {
+            background-color: #f8f8ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+            border-left: 5px solid #6a5acd;
+        }
+        
+        .balloon-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .balloon {
+            width: 100px;
+            height: 120px;
+            margin: 0 15px;
+            position: relative;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .balloon:hover {
+            transform: translateY(-10px);
+        }
+        
+        .balloon-body {
+            width: 100%;
+            height: 100px;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .balloon-string {
+            width: 2px;
+            height: 40px;
+            background-color: #666;
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .balloon-red .balloon-body {
+            background-color: #ff6b6b;
+        }
+        
+        .balloon-yellow .balloon-body {
+            background-color: #ffd43b;
+        }
+        
+        .balloon-green .balloon-body {
+            background-color: #69db7c;
+        }
+        
+        .balloon-blue .balloon-body {
+            background-color: #4dabf7;
+        }
+        
+        .balloon-purple .balloon-body {
+            background-color: #da77f2;
+        }
+        
+        .balloon-outline .balloon-body {
+            background-color: #f8f9fa;
+            border: 2px dashed #adb5bd;
+        }
+        
+        .balloon-question .balloon-body {
+            background-color: #f8f9fa;
+            border: 2px solid #adb5bd;
+            font-size: 36px;
+            font-weight: bold;
+            color: #495057;
+        }
+        
+        .color-palette {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .color-option {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .color-option:hover {
+            transform: scale(1.2);
+        }
+        
+        .color-option.selected {
+            border: 3px solid #333;
+            transform: scale(1.2);
+        }
+        
+        .color-red {
+            background-color: #ff6b6b;
+        }
+        
+        .color-yellow {
+            background-color: #ffd43b;
+        }
+        
+        .color-green {
+            background-color: #69db7c;
+        }
+        
+        .color-blue {
+            background-color: #4dabf7;
+        }
+        
+        .color-purple {
+            background-color: #da77f2;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 30px;
+            background-color: #6a5acd;
+            color: white;
+            font-size: 18px;
+            font-family: 'Jua', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 0 10px 10px 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        button:hover {
+            background-color: #5a4abf;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        button.reset {
+            background-color: #ff8787;
+        }
+        
+        button.reset:hover {
+            background-color: #fa5252;
+        }
+        
+        .feedback {
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 20px;
+            display: none;
+        }
+        
+        .feedback.correct {
+            background-color: #d3f9d8;
+            color: #2b8a3e;
+            border: 1px solid #8ce99a;
+        }
+        
+        .feedback.incorrect {
+            background-color: #ffe3e3;
+            color: #c92a2a;
+            border: 1px solid #ffa8a8;
+        }
+        
+        .pattern-maker {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .pattern-slot {
+            width: 80px;
+            height: 100px;
+            margin: 0 10px 20px 10px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .pattern-slot-outline {
+            width: 100%;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px dashed #adb5bd;
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        
+        .pattern-slot-string {
+            width: 2px;
+            height: 30px;
+            background-color: #666;
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #f00;
+            border-radius: 50%;
+            animation: fall 3s linear forwards;
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .star-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1001;
+            display: none;
+        }
+        
+        .star {
+            font-size: 150px;
+            color: gold;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+            animation: pulse 1s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>패턴 인식 학습 프로그램</h1>
+        </header>
+        
+        <div class="tab-container">
+            <button class="tab active" onclick="showActivity('pattern-matching')">풍선 패턴 맞추기</button>
+            <button class="tab" onclick="showActivity('pattern-making')">나만의 패턴 만들기</button>
+        </div>
+        
+        <div class="content">
+            <!-- 패턴 맞추기 활동 -->
+            <div id="pattern-matching" class="activity active">
+                <h2>풍선 패턴 맞추기</h2>
+                
+                <div class="instructions">
+                    아래 풍선 패턴을 보고 다음에 올 풍선의 색깔을 맞춰보세요!
+                </div>
+                
+                <div class="balloon-container">
+                    <div class="balloon balloon-red">
+                        <div class="balloon-body"></div>
+                        <div class="balloon-string"></div>
+                    </div>
+                    <div class="balloon balloon-yellow">
+                        <div class="balloon-body"></div>
+                        <div class="balloon-string"></div>
+                    </div>
+                    <div class="balloon balloon-green">
+                        <div class="balloon-body"></div>
+                        <div class="balloon-string"></div>
+                    </div>
+                    <div class="balloon balloon-red">
+                        <div class="balloon-body"></div>
+                        <div class="balloon-string"></div>
+                    </div>
+                    <div class="balloon balloon-yellow">
+                        <div class="balloon-body"></div>
+                        <div class="balloon-string"></div>
+                    </div>
+                    <div class="balloon balloon-green">
+                        <div class="balloon-body"></div>
+                        <div class="balloon-string"></div>
+                    </div>
+                    <div class="balloon balloon-outline" id="balloon-to-color">
+                        <div class="balloon-body"></div>
+                        <div class="balloon-string"></div>
+                    </div>
+                </div>
+                
+                <div class="instructions">
+                    다음에 올 풍선의 색깔을 선택하세요:
+                </div>
+                
+                <div class="color-palette">
+                    <div class="color-option color-red" onclick="selectBalloonColor('red')"></div>
+                    <div class="color-option color-yellow" onclick="selectBalloonColor('yellow')"></div>
+                    <div class="color-option color-green" onclick="selectBalloonColor('green')"></div>
+                    <div class="color-option color-blue" onclick="selectBalloonColor('blue')"></div>
+                    <div class="color-option color-purple" onclick="selectBalloonColor('purple')"></div>
+                </div>
+                
+                <div class="button-container">
+                    <button onclick="checkBalloonPattern()">확인하기</button>
+                    <button class="reset" onclick="resetBalloonPattern()">다시하기</button>
+                </div>
+                
+                <div id="balloon-feedback" class="feedback"></div>
+            </div>
+            
+            <!-- 패턴 만들기 활동 -->
+            <div id="pattern-making" class="activity">
+                <h2>나만의 풍선 패턴 만들기</h2>
+                
+                <div class="instructions">
+                    빨간색, 노란색, 초록색 풍선을 사용하여 나만의 패턴을 만들어보세요!<br>
+                    패턴이 반복되도록 만들어보세요.
+                </div>
+                
+                <div class="color-palette">
+                    <div class="color-option color-red" onclick="selectPatternColor('red')"></div>
+                    <div class="color-option color-yellow" onclick="selectPatternColor('yellow')"></div>
+                    <div class="color-option color-green" onclick="selectPatternColor('green')"></div>
+                </div>
+                
+                <div class="pattern-maker">
+                    <div class="pattern-slot" onclick="colorPatternSlot(0)">
+                        <div class="pattern-slot-outline" id="pattern-slot-0"></div>
+                        <div class="pattern-slot-string"></div>
+                    </div>
+                    <div class="pattern-slot" onclick="colorPatternSlot(1)">
+                        <div class="pattern-slot-outline" id="pattern-slot-1"></div>
+                        <div class="pattern-slot-string"></div>
+                    </div>
+                    <div class="pattern-slot" onclick="colorPatternSlot(2)">
+                        <div class="pattern-slot-outline" id="pattern-slot-2"></div>
+                        <div class="pattern-slot-string"></div>
+                    </div>
+                    <div class="pattern-slot" onclick="colorPatternSlot(3)">
+                        <div class="pattern-slot-outline" id="pattern-slot-3"></div>
+                        <div class="pattern-slot-string"></div>
+                    </div>
+                    <div class="pattern-slot" onclick="colorPatternSlot(4)">
+                        <div class="pattern-slot-outline" id="pattern-slot-4"></div>
+                        <div class="pattern-slot-string"></div>
+                    </div>
+                    <div class="pattern-slot" onclick="colorPatternSlot(5)">
+                        <div class="pattern-slot-outline" id="pattern-slot-5"></div>
+                        <div class="pattern-slot-string"></div>
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <button onclick="checkPattern()">패턴 확인하기</button>
+                    <button class="reset" onclick="resetPattern()">다시하기</button>
+                </div>
+                
+                <div id="pattern-feedback" class="feedback"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="celebration" id="celebration"></div>
+    <div class="star-container" id="star-container">
+        <div class="star">⭐</div>
+    </div>
+    
+    <script>
+        // 활동 전환 함수
+        function showActivity(activityId) {
+            // 모든 탭과 활동 비활성화
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.activity').forEach(activity => {
+                activity.classList.remove('active');
+            });
+            
+            // 선택한 탭과 활동 활성화
+            document.querySelector(`.tab[onclick="showActivity('${activityId}')"]`).classList.add('active');
+            document.getElementById(activityId).classList.add('active');
+            
+            // 피드백 초기화
+            document.querySelectorAll('.feedback').forEach(feedback => {
+                feedback.style.display = 'none';
+            });
+        }
+        
+        // 풍선 패턴 맞추기 관련 변수와 함수
+        let selectedBalloonColor = null;
+        
+        function selectBalloonColor(color) {
+            selectedBalloonColor = color;
+            
+            // 선택된 색상 표시
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            document.querySelector(`.color-option.color-${color}`).classList.add('selected');
+            
+            // 풍선 색칠하기
+            const balloonToColor = document.getElementById('balloon-to-color');
+            balloonToColor.className = `balloon balloon-${color}`;
+        }
+        
+        function checkBalloonPattern() {
+            const feedbackElement = document.getElementById('balloon-feedback');
+            feedbackElement.style.display = 'block';
+            
+            if (selectedBalloonColor === 'red') {
+                feedbackElement.textContent = '정답입니다! 🎉 "빨간색-노란색-초록색" 패턴을 잘 찾았어요!';
+                feedbackElement.className = 'feedback correct';
+                showCelebration();
+            } else {
+                feedbackElement.textContent = '다시 생각해보세요. 풍선 색깔이 어떤 순서로 반복되고 있나요?';
+                feedbackElement.className = 'feedback incorrect';
+            }
+        }
+        
+        function resetBalloonPattern() {
+            // 선택된 색상 초기화
+            selectedBalloonColor = null;
+            
+            // 색상 선택 표시 제거
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // 풍선 초기화
+            document.getElementById('balloon-to-color').className = 'balloon balloon-outline';
+            
+            // 피드백 초기화
+            document.getElementById('balloon-feedback').style.display = 'none';
+        }
+        
+        // 패턴 만들기 관련 변수와 함수
+        let selectedPatternColor = null;
+        let patternSlots = Array(6).fill(null);
+        
+        function selectPatternColor(color) {
+            selectedPatternColor = color;
+            
+            // 선택된 색상 표시
+            document.querySelectorAll('#pattern-making .color-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            document.querySelector(`#pattern-making .color-option.color-${color}`).classList.add('selected');
+        }
+        
+        function colorPatternSlot(index) {
+            if (!selectedPatternColor) return;
+            
+            patternSlots[index] = selectedPatternColor;
+            
+            // 슬롯 색칠하기
+            const slotElement = document.getElementById(`pattern-slot-${index}`);
+            slotElement.style.backgroundColor = getComputedStyle(document.querySelector(`.color-${selectedPatternColor}`)).backgroundColor;
+            slotElement.style.border = 'none';
+        }
+        
+        function checkPattern() {
+            const feedbackElement = document.getElementById('pattern-feedback');
+            feedbackElement.style.display = 'block';
+            
+            // 패턴이 모두 채워졌는지 확인
+            const filledSlots = patternSlots.filter(color => color !== null);
+            if (filledSlots.length < 4) {
+                feedbackElement.textContent = '최소 4개 이상의 풍선을 색칠해주세요!';
+                feedbackElement.className = 'feedback incorrect';
+                return;
+            }
+            
+            // 패턴 반복 확인
+            const hasPattern = checkForRepeatingPattern();
+            
+            if (hasPattern) {
+                feedbackElement.textContent = '멋진 패턴을 만들었어요! 🎉 반복되는 패턴을 잘 만들었습니다.';
+                feedbackElement.className = 'feedback correct';
+                showCelebration();
+            } else {
+                feedbackElement.textContent = '반복되는 패턴을 만들어보세요. 예: 빨강-노랑-빨강-노랑 또는 빨강-노랑-초록-빨강-노랑-초록';
+                feedbackElement.className = 'feedback incorrect';
+            }
+        }
+        
+        function checkForRepeatingPattern() {
+            // 패턴이 반복되는지 확인하는 함수
+            const filledSlots = patternSlots.filter(color => color !== null);
+            
+            // 2개 단위 패턴 확인
+            if (filledSlots.length >= 4) {
+                let isPattern = true;
+                for (let i = 0; i < 2; i++) {
+                    if (filledSlots[i] !== filledSlots[i+2]) {
+                        isPattern = false;
+                        break;
+                    }
+                }
+                if (isPattern) return true;
+            }
+            
+            // 3개 단위 패턴 확인
+            if (filledSlots.length >= 6) {
+                let isPattern = true;
+                for (let i = 0; i < 3; i++) {
+                    if (filledSlots[i] !== filledSlots[i+3]) {
+                        isPattern = false;
+                        break;
+                    }
+                }
+                if (isPattern) return true;
+            }
+            
+            return false;
+        }
+        
+        function resetPattern() {
+            // 선택된 색상 초기화
+            selectedPatternColor = null;
+            
+            // 색상 선택 표시 제거
+            document.querySelectorAll('#pattern-making .color-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // 패턴 슬롯 초기화
+            patternSlots = Array(6).fill(null);
+            
+            for (let i = 0; i < 6; i++) {
+                const slotElement = document.getElementById(`pattern-slot-${i}`);
+                slotElement.style.backgroundColor = '#f8f9fa';
+                slotElement.style.border = '2px dashed #adb5bd';
+            }
+            
+            // 피드백 초기화
+            document.getElementById('pattern-feedback').style.display = 'none';
+        }
+        
+        // 축하 효과 함수
+        function showCelebration() {
+            // 색종이 효과
+            const celebrationElement = document.getElementById('celebration');
+            celebrationElement.style.display = 'block';
+            celebrationElement.innerHTML = '';
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = getRandomColor();
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                celebrationElement.appendChild(confetti);
+            }
+            
+            // 별 효과
+            const starContainer = document.getElementById('star-container');
+            starContainer.style.display = 'block';
+            
+            // 3초 후 효과 제거
+            setTimeout(() => {
+                celebrationElement.style.display = 'none';
+                starContainer.style.display = 'none';
+            }, 3000);
+        }
+        
+        function getRandomColor() {
+            const colors = ['#ff6b6b', '#ffd43b', '#69db7c', '#4dabf7', '#da77f2', 
+                           '#ffa8a8', '#ffe066', '#b2f2bb', '#a5d8ff', '#e599f7'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+</body>
+</html> 

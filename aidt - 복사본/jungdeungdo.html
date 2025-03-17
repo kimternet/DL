@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중등도 장애 학생용 패턴 인식 학습</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h1, h2, h3 {
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .level-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #e8f5e9;
+            border: 2px solid #c8e6c9;
+        }
+        
+        .problem {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .pattern {
+            font-size: 60px;
+            letter-spacing: 10px;
+            margin: 20px 0;
+            line-height: 1.5;
+            text-align: center;
+        }
+        
+        .options-container {
+            margin-top: 30px;
+        }
+        
+        .options-label {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .options {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .option {
+            font-size: 60px;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .option:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.1);
+        }
+        
+        .selected {
+            background-color: #e0e0e0;
+            border: 3px solid #2196F3;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 20px auto;
+            font-size: 24px;
+            display: block;
+            width: 80%;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+        
+        .feedback {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+            font-size: 24px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .correct {
+            background-color: #dff0d8;
+            color: #3c763d;
+            animation: pulse 1s infinite;
+        }
+        
+        .incorrect {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        
+        .visual-feedback {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            font-size: 60px;
+            height: 80px;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            display: none;
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #f00;
+            border-radius: 50%;
+            animation: fall 3s linear forwards;
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .pattern-explanation {
+            font-size: 18px;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            border-left: 4px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>패턴 인식 학습 프로그램</h1>
+        
+        <!-- 중등도 장애 섹션 -->
+        <div class="level-section">
+            <h2>중등도 장애 학습자용</h2>
+            <div class="problem">
+                <h3>다음 규칙을 완성해보세요.</h3>
+                <div class="pattern">🍎 🍎 🍌 🍎 🍎 🍌 🍎 🍎 ___</div>
+                <div class="pattern-explanation">
+                    "사과 사과 바나나"가 반복되고 있어요.
+                </div>
+                <div class="visual-feedback" id="moderate-visual"></div>
+                
+                <div class="options-container">
+                    <div class="options-label">빈칸에 들어갈 것을 선택하세요:</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption('🍎', this)">🍎</div>
+                        <div class="option" onclick="selectOption('🍌', this)">🍌</div>
+                        <div class="option" onclick="selectOption('🍊', this)">🍊</div>
+                    </div>
+                </div>
+                
+                <button onclick="checkAnswer()">확인하기</button>
+                <div id="feedback" class="feedback"></div>
+            </div>
+        </div>
+        
+        <div class="level-section">
+            <h2>다른 패턴 문제</h2>
+            <div class="problem">
+                <h3>다음 규칙을 완성해보세요.</h3>
+                <div class="pattern">🐶 🐱 🐱 🐶 🐱 🐱 ___</div>
+                <div class="pattern-explanation">
+                    이 패턴은 어떤 규칙이 있을까요?
+                </div>
+                <div class="visual-feedback" id="moderate-visual2"></div>
+                
+                <div class="options-container">
+                    <div class="options-label">빈칸에 들어갈 것을 선택하세요:</div>
+                    <div class="options">
+                        <div class="option" onclick="selectOption2('🐶', this)">🐶</div>
+                        <div class="option" onclick="selectOption2('🐱', this)">🐱</div>
+                        <div class="option" onclick="selectOption2('🐭', this)">🐭</div>
+                    </div>
+                </div>
+                
+                <button onclick="checkAnswer2()">확인하기</button>
+                <div id="feedback2" class="feedback"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="celebration" id="celebration"></div>
+
+    <script>
+        // 첫 번째 문제 관련 변수와 함수
+        let selectedOption = null;
+        
+        function selectOption(option, element) {
+            // 이전에 선택된 옵션의 선택 표시 제거
+            document.querySelectorAll('.problem:first-of-type .option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // 현재 선택한 옵션에 선택 표시 추가
+            element.classList.add('selected');
+            selectedOption = option;
+            
+            // 시각적 피드백 영역에 선택한 옵션 표시
+            document.getElementById('moderate-visual').innerHTML = option;
+        }
+        
+        function checkAnswer() {
+            let feedbackElement = document.getElementById('feedback');
+            let visualElement = document.getElementById('moderate-visual');
+            feedbackElement.style.display = 'block';
+            
+            if (selectedOption === '🍌') {
+                feedbackElement.textContent = '정답입니다! 🎉 "사과 사과 바나나" 규칙을 잘 찾았어요.';
+                feedbackElement.className = 'feedback correct';
+                visualElement.innerHTML = '🍎 🍎 🍌 🍎 🍎 🍌 🍎 🍎 🍌';
+                
+                // 축하 효과 표시
+                showCelebration();
+            } else {
+                feedbackElement.textContent = '"사과 사과 바나나"가 반복되고 있어요.';
+                feedbackElement.className = 'feedback incorrect';
+            }
+        }
+        
+        // 두 번째 문제 관련 변수와 함수
+        let selectedOption2 = null;
+        
+        function selectOption2(option, element) {
+            // 이전에 선택된 옵션의 선택 표시 제거
+            document.querySelectorAll('.problem:last-of-type .option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // 현재 선택한 옵션에 선택 표시 추가
+            element.classList.add('selected');
+            selectedOption2 = option;
+            
+            // 시각적 피드백 영역에 선택한 옵션 표시
+            document.getElementById('moderate-visual2').innerHTML = option;
+        }
+        
+        function checkAnswer2() {
+            let feedbackElement = document.getElementById('feedback2');
+            let visualElement = document.getElementById('moderate-visual2');
+            feedbackElement.style.display = 'block';
+            
+            if (selectedOption2 === '🐶') {
+                feedbackElement.textContent = '정답입니다! 🎉 "강아지 고양이 고양이"가 반복되는 패턴이에요.';
+                feedbackElement.className = 'feedback correct';
+                visualElement.innerHTML = '🐶 🐱 🐱 🐶 🐱 🐱 🐶';
+                
+                // 축하 효과 표시
+                showCelebration();
+            } else {
+                feedbackElement.textContent = '"강아지 고양이 고양이" 규칙이 반복되고 있네요~?';
+                feedbackElement.className = 'feedback incorrect';
+            }
+        }
+        
+        function showCelebration() {
+            const celebrationElement = document.getElementById('celebration');
+            celebrationElement.style.display = 'block';
+            celebrationElement.innerHTML = '';
+            
+            // 색종이 효과 생성
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = getRandomColor();
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                celebrationElement.appendChild(confetti);
+            }
+            
+            // 3초 후 축하 효과 제거
+            setTimeout(() => {
+                celebrationElement.style.display = 'none';
+            }, 3000);
+        }
+        
+        function getRandomColor() {
+            const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', 
+                           '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4caf50', 
+                           '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+    </script>
+</body>
+</html> 
